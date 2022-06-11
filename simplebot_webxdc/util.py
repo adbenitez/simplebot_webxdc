@@ -95,6 +95,9 @@ def get_metadata(project_url: str) -> dict:
                     _parts = meta["description"].split(" Contribute to ", maxsplit=1)
                     if len(_parts) != 1 and "GitHub" in _parts[1]:
                         meta["description"] = _parts[0]
+                    _parts = meta["description"].split(" - Releases ·", maxsplit=1)
+                    if len(_parts) != 1:
+                        meta["description"] = _parts[0]
                 meta["version"] = file_url.rsplit("/", maxsplit=2)[-2]
 
         cached_url, xdcfile = _get_webxdc(project_url)
