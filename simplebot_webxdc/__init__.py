@@ -72,7 +72,7 @@ def list_cmd(bot: DeltaBot, replies: Replies) -> None:
                 apps.append(meta)
 
             if apps:
-                apps.sort(key=lambda it: it.get("name"))
+                apps.sort(key=lambda it: it.get("name"))  # type: ignore
                 fzip.writestr("manifest.toml", 'name = "Webxdc List"')
                 fzip.writestr("index.html", HTML_FILE)
                 fzip.writestr("main.js", JS_FILE)
