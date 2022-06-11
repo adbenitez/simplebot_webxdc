@@ -9,7 +9,7 @@ import simplebot
 from deltachat import Message
 from simplebot.bot import DeltaBot, Replies
 
-from .data import css_file, html_file, js_file
+from .data import CSS_FILE, HTML_FILE, JS_FILE
 from .util import (
     get_metadata,
     get_urls,
@@ -55,8 +55,8 @@ def list_cmd(bot: DeltaBot, replies: Replies) -> None:
         path = file.name
 
     apps = []
-    with open(path, "wb") as f:
-        with zipfile.ZipFile(f, "w", compression=zipfile.ZIP_DEFLATED) as fzip:
+    with open(path, "wb") as xdc:
+        with zipfile.ZipFile(xdc, "w", compression=zipfile.ZIP_DEFLATED) as fzip:
 
             for index, url in enumerate(get_urls(bot)):
                 meta = get_metadata(url)
@@ -72,9 +72,9 @@ def list_cmd(bot: DeltaBot, replies: Replies) -> None:
 
             if apps:
                 fzip.writestr("manifest.toml", 'name = "Webxdc List"')
-                fzip.writestr("index.html", html_file)
-                fzip.writestr("main.js", js_file)
-                fzip.writestr("styles.css", css_file)
+                fzip.writestr("index.html", HTML_FILE)
+                fzip.writestr("main.js", JS_FILE)
+                fzip.writestr("styles.css", CSS_FILE)
                 fzip.writestr("data.json", json.dumps(apps))
 
     if not apps:

@@ -1,4 +1,4 @@
-html_file = """
+HTML_FILE = """
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,7 +14,7 @@ html_file = """
 </html>
 """
 
-css_file = """
+CSS_FILE = """
 html {
     height: 100%;
     background-color: #4158D0;
@@ -77,7 +77,7 @@ a.btn {
 }
 """
 
-js_file = """
+JS_FILE = """
 function d(btn, appId) {
     btn.innerText = "Downloading...";
     btn.style.background = "#bfbfbf";
