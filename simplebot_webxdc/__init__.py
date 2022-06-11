@@ -4,6 +4,7 @@ import zipfile
 import zlib
 from io import BytesIO
 from tempfile import NamedTemporaryFile
+from typing import List
 
 import simplebot
 from deltachat import Message
@@ -54,7 +55,7 @@ def list_cmd(bot: DeltaBot, replies: Replies) -> None:
     ) as file:
         path = file.name
 
-    apps = []
+    apps: List[dict] = []
     with open(path, "wb") as xdc:
         with zipfile.ZipFile(xdc, "w", compression=zipfile.ZIP_DEFLATED) as fzip:
 
@@ -71,6 +72,7 @@ def list_cmd(bot: DeltaBot, replies: Replies) -> None:
                 apps.append(meta)
 
             if apps:
+                apps.sort(key=lambda it: it.get("name"))
                 fzip.writestr("manifest.toml", 'name = "Webxdc List"')
                 fzip.writestr("index.html", HTML_FILE)
                 fzip.writestr("main.js", JS_FILE)

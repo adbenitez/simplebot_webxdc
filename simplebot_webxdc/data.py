@@ -19,11 +19,12 @@ html {
     height: 100%;
     background-color: #4158D0;
     background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
-    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 body {
-   margin: 1em;
+   margin: 0;
+   padding: 1em;
 }
 
 h3 {
@@ -100,7 +101,7 @@ function h(tag, attributes, ...children) {
 function main(data) {
   let root = document.getElementById("root");
   data.forEach(meta => {
-    root.append(h("div", {class: "card"},
+    root.appendChild(h("div", {class: "card"},
       h("div", {class: "flex"},
         h("img", {src: meta.icon}),
         h("div", {class: "flex-1"},
