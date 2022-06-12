@@ -76,6 +76,10 @@ a.btn {
     padding: 1em;
     border-radius: 1em;
 }
+
+.right {
+    text-align: right;
+}
 """
 
 JS_FILE = """
@@ -113,7 +117,7 @@ function main(data) {
       ),
       h("p", {}, meta.description),
       h("br"),
-      h("a", {class: "btn", href: "#", onclick: "d(this, '" + meta.id + "'); return false;"}, "Download")
+      h("div", {class: "right"}, h("a", {class: "btn", href: "#", onclick: "d(this, '" + meta.id + "'); return false;"}, "Download"))
       ));
   });
 }
