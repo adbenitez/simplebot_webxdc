@@ -71,15 +71,16 @@ def list_cmd(bot: DeltaBot, replies: Replies) -> None:
                     meta["icon"] = ""
                 apps.append(meta)
 
-            if apps:
+            count = len(apps)
+            if count:
                 apps.sort(key=lambda it: it.get("name"))  # type: ignore
-                fzip.writestr("manifest.toml", 'name = "Webxdc List"')
+                fzip.writestr("manifest.toml", f'name = "Webxdc List ({count})"')
                 fzip.writestr("index.html", HTML_FILE)
                 fzip.writestr("main.js", JS_FILE)
                 fzip.writestr("styles.css", CSS_FILE)
                 fzip.writestr("data.json", json.dumps(apps))
 
-    if not apps:
+    if not count:
         os.remove(path)
         replies.add(text="❌ Empty List")
         return
