@@ -34,7 +34,7 @@ def deltabot_init(bot: DeltaBot) -> None:
 @simplebot.filter(admin=True)
 def filter_messages(bot: DeltaBot, message: Message, replies: Replies) -> None:
     """Send me webxdc source URLs to add them to the list"""
-    if message.chat.is_group() or not message.text.startswith("http"):
+    if message.chat.is_multiuser() or not message.text.startswith("http"):
         return
 
     url = message.text.rstrip("/")
