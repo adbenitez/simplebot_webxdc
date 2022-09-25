@@ -75,8 +75,12 @@ def get_metadata(project_url: str) -> dict:
             url = project_url
         with session.get(url) as resp:
             soup = BeautifulSoup(resp.text, "html.parser")
+            if project_url.startswith("https://github.com/"):
+                tag = soup.find("svg", class_="octicon-tag").parent.span.text.strip()
+                with session.get(f"{url}/expanded_assets/{tag}") as resp:
+                    soup = BeautifulSoup(resp.text, "html.parser")
             file_url = (
-                (soup.find(class_="Box-footer") or soup).find(
+                soup.find(
                     "a", attrs={"href": lambda href: href and href.endswith(".xdc")}
                 )
                 or {}
